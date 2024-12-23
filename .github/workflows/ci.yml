@@ -1,9 +1,9 @@
-name: 🚀 iOS CI with Fastlane
+name: 🚀 iOS CI with XcodeGen
 
 on:
   push:
     branches:
-      - '**'  # Run on all branches
+      - '**'
   pull_request:
 
 jobs:
@@ -14,10 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode Project
+        run: xcodegen generate
       - name: Install Ruby and Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0' # Use a compatible Ruby version
+          ruby-version: '3.0'
 
       - name: Install Gems with Bundler
         run: |

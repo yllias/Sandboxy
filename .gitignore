@@ -4,6 +4,7 @@
 
 ## User settings
 xcuserdata/
+*.xcodeproj
 *.xcuserstate
 
 ## Obj-C/Swift specific
