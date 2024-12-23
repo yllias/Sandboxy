@@ -2,7 +2,7 @@ name: Sandboxy
 options:
   bundleIdPrefix: com.yll.Sandboxy
   deploymentTarget:
-    iOS: '18.0'
+    iOS: '17.0'
 
 settings:
   base:
