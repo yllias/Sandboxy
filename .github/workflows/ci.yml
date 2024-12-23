@@ -1,4 +1,4 @@
-name: 🚀 iOS CI with XcodeGen
+name: 🚀 iOS CI with Automatic Signing
 
 on:
   push:
@@ -11,6 +11,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -19,14 +20,12 @@ jobs:
 
       - name: Generate Xcode Project
         run: xcodegen generate
-      - name: Install Ruby and Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
 
-      - name: Install Gems with Bundler
+      - name: Build with xcodebuild
         run: |
-          bundle install
-
-      - name: Build with Fastlane
-        run: bundle exec fastlane build
+          xcodebuild clean build \
+            -project Sandboxy.xcodeproj \
+            -scheme Sandboxy \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' \
+            -allowProvisioningUpdates
