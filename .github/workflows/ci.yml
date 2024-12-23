@@ -1,0 +1,41 @@
+name: iOS CI 🚀 
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+jobs:
+  linting:
+    name: SwiftLint 🔍
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install SwiftLint
+        run: |
+          brew install swiftlint || echo "SwiftLint already installed"
+
+      - name: Run SwiftLint
+        run: swiftlint
+
+  # Building Job
+  building:
+    name: Build Project 🛠️
+    runs-on: macos-latest
+    needs: linting
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build with Xcode
+        run: |
+          xcodebuild clean build \
+            -project Sandboxy.xcodeproj \
+            -scheme Sandboxy \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.0'

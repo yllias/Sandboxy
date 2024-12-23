@@ -4,6 +4,7 @@
 
 ## User settings
 xcuserdata/
+*.xcuserstate
 
 ## Obj-C/Swift specific
 *.hmap
@@ -40,7 +41,8 @@ playground.xcworkspace
 # Pods/
 #
 # Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 
 # Carthage
 #
@@ -60,3 +62,14 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# macOS system files
+.DS_Store
+
+# Build artifacts
+DerivedData/
+build/
+
+# Environment files
+.env
+.env.*
