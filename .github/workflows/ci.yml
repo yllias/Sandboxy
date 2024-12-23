@@ -43,6 +43,7 @@ jobs:
       run: |
         brew install swiftlint || echo "SwiftLint already installed"
         pod install || echo "No CocoaPods needed"
+        brew install xcodegen || echo "XcodeGen already installed"
 
     - name: Generate Xcode Project
       run: xcodegen
