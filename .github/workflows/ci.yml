@@ -29,6 +29,7 @@ jobs:
   build:
     name: Build Project
     runs-on: macos-latest
+    needs: lint
 
     steps:
     - name: Checkout code
@@ -49,4 +50,4 @@ jobs:
       run: xcodegen
 
     - name: Build Project
-      run: xcodebuild -project Sandboxy.xcodeproj -scheme Sandboxy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' build
+      run: xcodebuild -project Sandboxy.xcodeproj -scheme Sandboxy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest' build
