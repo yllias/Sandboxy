@@ -1,31 +1,32 @@
-name: 🚀 iOS CI with Automatic Signing
+name: iOS Build and Lint
 
 on:
   push:
     branches:
-      - '**'
+      - main
   pull_request:
 
 jobs:
   build:
+    name: Build and Lint
     runs-on: macos-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v2
+      with:
+        xcode-version: latest
 
-      - name: Install XcodeGen
-        run: brew install xcodegen
+    - name: Install dependencies
+      run: |
+        brew install swiftlint || echo "SwiftLint already installed"
+        pod install || echo "No CocoaPods needed"
 
-      - name: Generate Xcode Project
-        run: xcodegen generate
+    - name: Lint Code
+      run: swiftlint
 
-      - name: Build with xcodebuild
-        run: |
-          xcodebuild clean build \
-            -project Sandboxy.xcodeproj \
-            -scheme Sandboxy \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' \
-            -allowProvisioningUpdates
+    - name: Build Project
+      run: xcodebuild -workspace Sandboxy.xcworkspace -scheme Sandboxy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' build
