@@ -20,5 +20,6 @@ targets:
         CODE_SIGN_IDENTITY: Apple Development
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: H8X222M97N
+        GENERATE_INFOPLIST_FILE: YES
     scheme:
       testTargets: []
