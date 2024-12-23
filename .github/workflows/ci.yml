@@ -26,7 +26,7 @@ jobs:
         pod install || echo "No CocoaPods needed"
 
     - name: Lint Code
-      run: swiftlint
+      run: swiftlint --strict
 
     - name: Build Project
       run: xcodebuild -workspace Sandboxy.xcworkspace -scheme Sandboxy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' build
