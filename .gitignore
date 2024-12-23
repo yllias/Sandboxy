@@ -73,3 +73,5 @@ build/
 # Environment files
 .env
 .env.*
+
+Sandboxy.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings

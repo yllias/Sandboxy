@@ -1,4 +1,4 @@
-name: iOS CI 🚀 
+name: iOS CI with Fastlane
 
 on:
   push:
@@ -7,35 +7,24 @@ on:
   pull_request:
 
 jobs:
-  linting:
-    name: SwiftLint 🔍
+  build:
     runs-on: macos-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install SwiftLint
+      # Step 2: Set Xcode Version
+      - name: Set Xcode 16.2
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+
+      # Step 3: Install Fastlane
+      - name: Install Fastlane
         run: |
-          brew install swiftlint || echo "SwiftLint already installed"
+          gem install fastlane
+          fastlane --version
 
-      - name: Run SwiftLint
-        run: swiftlint
-
-  # Building Job
-  building:
-    name: Build Project 🛠️
-    runs-on: macos-latest
-    needs: linting
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Build with Xcode
-        run: |
-          xcodebuild clean build \
-            -project Sandboxy.xcodeproj \
-            -scheme Sandboxy \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.0'
+      # Step 4: Build the App
+      - name: Build with Fastlane
+        run: fastlane build

@@ -1,0 +1,10 @@
+platform :ios do
+  desc "Build the iOS app"
+  lane :build do
+    build_app(
+      scheme: "Sandboxy",            # Replace with your scheme
+      project: "Sandboxy.xcodeproj", # Replace with your project path
+      sdk: "iphonesimulator"
+    )
+  end
+end
