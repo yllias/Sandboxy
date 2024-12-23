@@ -14,7 +14,7 @@ targets:
     platform: iOS
     sources: [Sandboxy]
     bundleId: com.yll.Sandboxy
-    deploymentTarget: '18.0'
+    deploymentTarget: '17.0'
     settings:
       base:
         CODE_SIGN_IDENTITY: Apple Development
