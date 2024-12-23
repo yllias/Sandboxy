@@ -1,9 +1,9 @@
-name: iOS CI with Fastlane
+name: 🚀 iOS CI with Fastlane
 
 on:
   push:
     branches:
-      - '**'
+      - '**'  # Run on all branches
   pull_request:
 
 jobs:
@@ -14,10 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Fastlane
+      - name: Install Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0' # Use a compatible Ruby version
+
+      - name: Install Gems with Bundler
         run: |
-          gem install fastlane
-          fastlane --version
-          
+          bundle install
+
       - name: Build with Fastlane
-        run: fastlane build
+        run: bundle exec fastlane build
